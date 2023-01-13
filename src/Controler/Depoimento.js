@@ -19,7 +19,8 @@ export async function selectDepoimentos(req,res){
 
 export async function sectionDepoimentos(req,res){
     // OFFSET É A QUANTIDADE DE DEPOIMENTOS QUE EU IREI PULAR
-    let {offset} = Number(req.params)
+    let {offset} = req.params
+    offset = Number(offset)
     if(!offset){
         offset = 0
     }
