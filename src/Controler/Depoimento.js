@@ -29,3 +29,11 @@ export async function sectionDepoimentos(req,res){
         .then(depoimento=>res.json(depoimento))
     })
 }
+
+export async function selectDepoimento(req,res){
+    let id = req.params.id
+    openDb().then(db=>{
+        db.get("SELECT * FROM Depoimentos WHERE id=?", [id])
+        .then(depoimento=>res.json(depoimento))
+    })
+}
