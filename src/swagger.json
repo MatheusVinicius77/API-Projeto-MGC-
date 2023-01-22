@@ -1,0 +1,148 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API do PROJETO MGC",
+        "description": "Essa API tem como objetivo manipulação de todos os depoimentos contidos no site",
+        "termsOfService": "https://localhost:3001/terms",
+        "contact": {
+            "email": "matheusviniciusz1234@hotmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://localhost:3001/",
+            "description": "API de teste"
+        }
+    ],
+    "paths": {
+        "/Depoimentos": {
+            "get": {
+                "summary": "Listagem de todos depoimentos",
+                "description": "Essa rota será responsável para listar todos os depoimentos que existem cadastradas no banco de dados",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Depoimentos"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Todos os Depoimentos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Depoimento"
+                                }
+                            }
+                        }
+                    }
+                },
+                "examples": {
+                    "depoimento": {
+                        "value": {
+                            "autor": "Matheus Vinicius",
+                            "status": "Voluntariado",
+                            "texto": "Sou um voluntariado do Projeto MGC e estou bastante feliz de ter participado do Projeto!",
+                            "imagem": "fotosDepoimento/matheus.jpeg"
+                        }
+                    }
+                }
+            }
+        },
+        "/Depoimentos/section/{offset}": {
+            "get": {
+                "summary": "Listagem de apenas três depoimentos",
+                "description": "Essa rota é responsável por listar apenas três depoimentos que irão apararecer no site. ",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "offset",
+                        "description": "Offset é um parâmetro que manipula quantos depoimentos irão ser pulados. É usado para controlar os depoimentos em suas páginas. (Inicia em 0 por padrão)",
+                        "type": "string",
+                        "required": false
+                    }
+                ],
+                "responses": {},
+                "tags": [
+                    "Depoimentos"
+                ]
+            }
+        },
+        "/Depoimento/{name}": {
+            "get": {
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "name",
+                        "description": " Name é o parâmetro de um depoimento específico",
+                        "type": "string",
+                        "required": true
+                    }
+                ],
+                "summary": "Listagem de um depoimentos específico",
+                "description": "Essa rota será responsável para listar apenas um depoimento específico",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Depoimentos"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Todos os Depoimentos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Depoimento"
+                                }
+                            }
+                        }
+                    }
+                },
+                "examples": {
+                    "depoimento": {
+                        "value": {
+                            "autor": "Matheus Vinicius",
+                            "status": "Voluntariado",
+                            "texto": "Sou um voluntariado do Projeto MGC e estou bastante feliz de ter participado do Projeto!",
+                            "imagem": "fotosDepoimento/matheus.jpeg"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Depoimento": {
+                "type": "object",
+                "autor": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "texto": {
+                    "type": "string"
+                },
+                "imagem": {
+                    "type": "string"
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "https",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
