@@ -19,6 +19,7 @@ export async function selectDepoimentos(req, res) {
 
 export async function sectionDepoimentos(req, res) {
     // OFFSET É A QUANTIDADE DE DEPOIMENTOS QUE EU IREI PULAR
+    console.log(req.params)
     let { offset } = req.params
     offset = Number(offset)
     if (!offset) {
@@ -31,6 +32,7 @@ export async function sectionDepoimentos(req, res) {
 }
 
 export async function selectDepoimento(req, res) {
+    print('oi')
     let name = req.params.name
     name = name[0].toUpperCase() + name.substring(1)
     openDb().then(db => {

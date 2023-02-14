@@ -2,14 +2,16 @@ import express from 'express'
 import fs from 'fs'
 import https from 'https'
 import cors from 'cors'
-import swaggerRoute from "./swagger.route.cjs"
+import swaggerUI from "swagger-ui-express"
+import swaggerDocs from "./swagger.json" assert {type: 'json'}
 
 const app = express()
 app.use(express.json())
-app.use("/doc", swaggerRoute)
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs))
 app.use(cors())
 
 import router from './routes.js'
+import { assert } from 'console'
 app.use(router);
 
 
