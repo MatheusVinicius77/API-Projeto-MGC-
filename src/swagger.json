@@ -11,9 +11,14 @@
     },
     "servers": [
         {
+            "url": "https://api-projetomgc.onrender.com/",
+            "description": "Render Server"
+        },
+        {
             "url": "https://localhost:3001/",
             "description": "API de teste"
         }
+
     ],
     "paths": {
         "/Depoimentos": {
